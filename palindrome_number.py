@@ -34,3 +34,4 @@ def is_palindrome(x: int) -> bool:
 # Example usage:
 print(is_palindrome(12321))  
 print(is_palindrome(131)) 
+
