@@ -1,14 +1,30 @@
-def uniquePaths(m, n):
-    dp = [1] * n  # first row is all 1s
+from functools import cache
 
-    for _ in range(1, m):
-        for j in range(1, n):
-            dp[j] += dp[j - 1]
-
-    return dp[-1]
+def uniquePaths(m: int, n: int) -> int:
+    
+    @cache
+    def backtrack(r, c):
+        # Base case
+        if r == m - 1 and c == n - 1:
+            return 1
+        
+        paths = 0
+        
+        # Move down
+        if r < m - 1:
+            paths += backtrack(r + 1, c)
+        
+        # Move right
+        if c < n - 1:
+            paths += backtrack(r, c + 1)
+        
+        return paths
+    
+    # Start from top-left corner
+    return backtrack(0, 0)
 
 # Example usage:
-if __name__ == "__main__": 
+if __name__ == "__main__":
     m = 3
     n = 7
     print(uniquePaths(m, n))  # Output: 28
